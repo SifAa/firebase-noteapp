@@ -16,3 +16,19 @@ Requirement specification for the note application:
 4. The user should be able to search in the notes.
 
 5.  The user should be able only to see the important notes.
+
+HINT HINT HINT!!!!
+
+He doesn't show how to edit notes in the videos.
+You can make it work this way: 
+
+db.collection("notes").doc(id).update({
+
+body: "some text",
+created_at: Date.now(),
+title: "som text"
+}).then(()=>{
+console.log("updated")
+}).catch(err => {
+console.log(err)
+})
