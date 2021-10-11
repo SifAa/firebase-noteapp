@@ -13,11 +13,15 @@
         <h1 class="my-4 text-center">Note app</h1>
 
         <!-- List of important notes -->
-        <!-- Should contain a delete button -->
+        <!-- Should contain a view and delete button -->
+        <div class="important-notes mb-3">
+            <ul class="note-list"></ul>
+        </div>
 
 
         <!-- window for viewing notes -->
         <!-- Should contain an edit button -->
+        <div class="note-window"></div>
 
 
         <!-- New note form -->
@@ -40,6 +44,21 @@
         </form>
     </div>
 
+    <script src="http://cdn.date-fns.org/v1.9.0/date_fns.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAKXVN8ggJ42QJm4d3WVMtweGH3rYfsk9o",
+            authDomain: "udemy-modern-javascript-72755.firebaseapp.com",
+            projectId: "udemy-modern-javascript-72755",
+            storageBucket: "udemy-modern-javascript-72755.appspot.com",
+            messagingSenderId: "366599257590",
+        };
+        firebase.initializeApp(config);
+        const db = firebase.firestore();
+    </script>
     <script src="scripts/notes.js"></script>
     <script src="scripts/ui.js"></script>
     <script src="scripts/app.js"></script>
