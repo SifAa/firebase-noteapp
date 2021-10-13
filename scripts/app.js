@@ -9,9 +9,11 @@ const addNote = (note, id) => {
         { addSuffix: true }
     );    
     let html = `
-     <li data-id="${id}">
-         <div class="list-title">${note.title}</div>
+     <li class="jumbotron" data-id="${id}">
+         <h3 class="list-title search">${note.title}</h3>
          <div class="time">${when}</div>
+         <p class="list-body">${note.body}</p>
+         <button class="btn btn-secondary btn-sm my-2">edit</button>    
          <button class="btn btn-danger btn-sm my-2">delete</button>
      </li>
     `;
@@ -25,17 +27,6 @@ const deleteNote = (id) => {
             note.remove();
         }
     });
-}
-
-const viewNote = (note) => {
-    let time = note.created_at.toDate();
-    let html = `
-     <h3 class="view-title">${note.title}</h3>
-     <p class="time">${time}</p>
-     <p class="view-body">${note.body}</p>
-     <button class="btn btn-secondary btn-sm my-2">edit</button>
-    `;
-    noteWindow = html;
 }
 
 // get documents
@@ -71,16 +62,6 @@ newNoteForm.addEventListener('submit', e => {
         console.log(err);
     });
 });
-
-// View a note
-noteList.addEventListener('click', e => {
-    if(e.target.className === 'list-title'){
-        const id = e.target.parentElement.getAttribute('data-id');
-        console.log(id);
-        // clear the view window
-        // Find which doc id corresponds to the id and run viewNote
-    }
-})
 
 // Delete a note
 noteList.addEventListener('click', e => {
