@@ -7,7 +7,7 @@ const addNote = (note, id) => {
     const when = dateFns.distanceInWordsToNow(
         note.created_at.toDate(),
         { addSuffix: true }
-    );    
+    );
     let html = `
      <li class="jumbotron" data-id="${id}">
          <h4 class="list-title search">${note.title}</h4>
@@ -17,7 +17,13 @@ const addNote = (note, id) => {
          <button class="btn btn-danger btn-sm my-2" value="delete">delete</button>
      </li>
     `;
-    noteList.innerHTML += html;
+
+    if(note.important == true){
+        noteList.innerHTML += html;
+    }
+    else{
+        console.log(note.title + " is not an important note")
+    }
 }
 
 const deleteNote = (id) => {
@@ -80,7 +86,7 @@ noteList.addEventListener('click', e => {
 search.addEventListener("keyup", () => {
     let filter = search.value.toUpperCase();
     let lis = document.querySelectorAll('.search');
-    
+
     lis.forEach((name)=>{
         if (name.innerText.toUpperCase().indexOf(filter) >= 0) {
            
