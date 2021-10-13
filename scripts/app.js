@@ -1,7 +1,7 @@
 // dom queries
 const noteList = document.querySelector('.note-list');
 const newNoteForm = document.querySelector('.new-note');
-const noteWindow = document.querySelector('.note-window');
+const search = document.querySelector('#search');
 
 const addNote = (note, id) => {
     const when = dateFns.distanceInWordsToNow(
@@ -72,3 +72,21 @@ noteList.addEventListener('click', e => {
         });
     }
 });
+
+// edit a note
+
+
+// search
+search.addEventListener("keyup", () => {
+    let filter = search.value.toUpperCase();
+    let lis = document.querySelectorAll('.search');
+    
+    lis.forEach((name)=>{
+        if (name.innerText.toUpperCase().indexOf(filter) >= 0) {
+           
+            name.parentElement.style.display = 'list-item'; 
+        } else{
+            name.parentElement.style.display = 'none'; 
+        }    
+    })
+})

@@ -20,6 +20,18 @@
     margin-bottom: 0.15rem;
 }
 
+#search {
+    background-image: url('media/searchicon.png');
+    background-position: 7px 10px; 
+    background-repeat: no-repeat;
+    background-size: 3%;
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+  }
+
 /* .new-note {
     max-width: 600px;
     margin: auto;
