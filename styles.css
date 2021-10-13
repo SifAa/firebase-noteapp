@@ -7,10 +7,8 @@
     padding-left: 0;
 }
 .jumbotron {
-    margin-bottom: 15px;
     background: antiquewhite;
-    padding: 10px 20px;
-    border-radius: 7px;
+    padding: 2.5rem 2rem;
 }
 .time {
     font-size: 0.7em;
@@ -30,11 +28,11 @@
     padding: 12px 20px 12px 40px;
     border: 1px solid #ddd;
     margin-bottom: 12px;
-  }
+}
 
-/* .new-note {
-    max-width: 600px;
-    margin: auto;
-    
-    padding: 0 20px;
-} */
+#newImportant {
+    margin-left: 0;
+}
+.form-check-label {
+    margin-left: 1.25rem;
+}
