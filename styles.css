@@ -1,3 +1,28 @@
 .container {
-    max-width: 600px;
+    max-width: 900px;
 }
+
+.note-list {
+    list-style: none;
+    padding-left: 0;
+}
+.jumbotron {
+    margin-bottom: 15px;
+    background: antiquewhite;
+    padding: 10px 20px;
+    border-radius: 7px;
+}
+.time {
+    font-size: 0.7em;
+    color: #999;
+}
+.list-body {
+    margin-bottom: 0.15rem;
+}
+
+/* .new-note {
+    max-width: 600px;
+    margin: auto;
+    
+    padding: 0 20px;
+} */
