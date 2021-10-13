@@ -10,11 +10,11 @@ const addNote = (note, id) => {
     );    
     let html = `
      <li class="jumbotron" data-id="${id}">
-         <h3 class="list-title search">${note.title}</h3>
+         <h4 class="list-title search">${note.title}</h4>
          <div class="time">${when}</div>
          <p class="list-body">${note.body}</p>
-         <button class="btn btn-secondary btn-sm my-2">edit</button>    
-         <button class="btn btn-danger btn-sm my-2">delete</button>
+         <button class="btn btn-success btn-sm my-2" value="edit">edit</button>    
+         <button class="btn btn-danger btn-sm my-2" value="delete">delete</button>
      </li>
     `;
     noteList.innerHTML += html;
@@ -65,7 +65,7 @@ newNoteForm.addEventListener('submit', e => {
 
 // Delete a note
 noteList.addEventListener('click', e => {
-    if(e.target.tagName === 'BUTTON'){
+    if(e.target.value === 'delete'){
         const id = e.target.parentElement.getAttribute('data-id');
         db.collection('notes').doc(id).delete().then(() => {
             console.log('note deleted');
