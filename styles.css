@@ -10,12 +10,16 @@
     background: antiquewhite;
     padding: 2.5rem 2rem;
 }
+.list-title {
+    margin-bottom: 0;
+}
 .time {
     font-size: 0.7em;
     color: #999;
+    margin-bottom: .5rem;
 }
 .list-body {
-    margin-bottom: 0.15rem;
+    margin-bottom: .15rem;
 }
 
 #search {

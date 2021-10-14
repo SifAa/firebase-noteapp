@@ -35,18 +35,35 @@ const deleteNote = (id) => {
     });
 }
 
+const editNote = (id) => {
+    const now = new Date();
+    db.collection("notes").doc(id).update({
+        body: newNoteForm.newBody.value,
+        created_at: firebase.firestore.Timestamp.fromDate(now),
+        title: newNoteForm.newTitle.value,
+        important: newNoteForm.newImportant.checked ? true : false
+        }).then(()=>{
+        console.log("updated")
+        }).catch(err => {
+        console.log(err)
+        })
+}
+
 // get documents
 // real time listener through onSnapshot
-// figure out a way to show only those with important == true
-const unsub = db.collection('notes').onSnapshot(snapshot => {
-    snapshot.docChanges().forEach(change => {
-        const doc = change.doc;
-        if(change.type === 'added'){
-            addNote(doc.data(), doc.id);
-        } else if (change.type === 'removed'){
-            deleteNote(doc.id);
-        }
-    })
+const unsub = db.collection('notes')
+    .orderBy('created_at')
+    .onSnapshot(snapshot => {
+        snapshot.docChanges().forEach(change => {
+            const doc = change.doc;
+            if (change.type === 'added'){
+                addNote(doc.data(), doc.id);
+            } else if (change.type === 'removed'){
+                deleteNote(doc.id);
+            } else if (change.type === 'modified'){
+                // editNote(doc.id); // here it does not work
+            }
+        })
 });
 
 // add a note
@@ -60,10 +77,26 @@ newNoteForm.addEventListener('submit', e => {
         body: newNoteForm.newBody.value,
         important: vin ? true : false
     };
+    let id = newNoteForm.newID.value;
+    let found = false;
 
-    db.collection('notes').add(note).then(() => {
-        console.log('note added');
-        newNoteForm.reset();
+    db.collection('notes').get().then(snapshot => {
+        snapshot.docs.forEach(doc => {
+            if(id == doc.id){
+                editNote(doc.id); //if here it works but does not update
+                console.log('note edited')
+                newNoteForm.reset();
+                found = true;
+            }
+        });
+        if(!found){
+            db.collection('notes').add(note).then(() => {
+                console.log('note added');
+                newNoteForm.reset();
+            }).catch(err => {
+                console.log(err);
+            });
+        }
     }).catch(err => {
         console.log(err);
     });
@@ -80,7 +113,17 @@ noteList.addEventListener('click', e => {
 });
 
 // edit a note
-
+noteList.addEventListener('click', e => {
+    if(e.target.value === 'edit'){
+        const id = e.target.parentElement.getAttribute('data-id');
+        db.collection('notes').doc(id).get().then((note) => {
+            newNoteForm.newID.value = note.id;
+            newNoteForm.newTitle.value = note.data().title;
+            newNoteForm.newBody.value = note.data().body;
+            newNoteForm.newImportant.checked = true;
+        });
+    }
+});
 
 // search
 search.addEventListener("keyup", () => {
